@@ -24,9 +24,6 @@
   {:else if game.winner < 0}
     <h2>Turn - {getPlayerLabel(game.currentPlayer)}</h2>
   {/if}
-  {console.log({
-    game,
-  })}
   {#each game.board as row, rowIdx}
     <div class="boardRow">
       {#each row as col, colIdx}
