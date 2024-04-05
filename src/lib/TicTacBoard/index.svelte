@@ -1,8 +1,8 @@
 <script lang="ts">
+  import Tictactoe from "@sahilsinghrana/tictactoe.js";
   import { getPlayerLabel } from "../utils";
 
   import BoardNode from "./BoardNode.svelte";
-  import Tictactoe from "@sahilsinghrana/tictactoe.js";
 
   let game = new Tictactoe();
 
@@ -12,6 +12,10 @@
       game = game;
     },
   });
+
+  const restart = () => {
+    game = new Tictactoe();
+  };
 </script>
 
 <div>
@@ -19,10 +23,11 @@
     {#if game.winner > -1}
       <h1>Game Won by {getPlayerLabel(game.winner)}</h1>
     {:else}
-      <h2>No one won</h2>
+      <h1>No one won</h1>
     {/if}
+    <button class="restartBtn" on:click={restart}>Restart</button>
   {:else if game.winner < 0}
-    <h2>Turn - {getPlayerLabel(game.currentPlayer)}</h2>
+    <h1>Turn - {getPlayerLabel(game.currentPlayer)}</h1>
   {/if}
   {#each game.board as row, rowIdx}
     <div class="boardRow">
@@ -32,3 +37,10 @@
     </div>
   {/each}
 </div>
+
+<style>
+  .restartBtn {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+</style>
